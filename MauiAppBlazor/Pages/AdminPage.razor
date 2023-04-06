@@ -6,11 +6,13 @@
 <div class="row"
     <div class="col-md-6">
         <div class="row  mt-3">
-            <div class="col-md-3 mb-2 mx-md-3">
-                <input class="form-text" type="text" @bind="@ProductCatalogDto.Name" /><br/>
+            <div class="col-md-3 mb-2">
+                <p>Назва продукту</p>
+                <input class="form-text" type="text" @bind="@ProductCatalogDto.Name" />
+                <p>Картинка URL</p>
                 <input class="form-text" type="url" @bind="@ProductCatalogDto.ImageURL" /><br/>
+                <p>Ціна продукта</p>
                 <input class="form-text" type="number" @bind="@ProductCatalogDto.Price" /><br />
-                <input class="form-text" type="number" @bind="@ProductCatalogDto.Type" /><br />
             </div>
             @if (((ProductCatalogDto.Name != null || ProductCatalogDto.ImageURL != null) &&
                     (ProductCatalogDto.Name != "" || ProductCatalogDto.ImageURL != "")) || ProductCatalogDto.Price > 0)
@@ -32,7 +34,7 @@
             </div>
             }
         </div>
-        <button type="button" class="btn btn-success mt-3" @onclick="CreateProductCatalog">Стаорити новий продукт</button>
+        <button type="button" class="btn btn-success mt-3" @onclick="CreateProductCatalog">Створити новий продукт</button>
     </div>
     <div class="col-md-6">
         @if (fullProductCatalogs == null)
@@ -50,7 +52,7 @@
                      <div class="row  mt-3">
                     @foreach (var prodGroup in fullProductCatalogs)
                     {                                             
-                        <div class="col-md-3 mb-2">                          
+                         <div class="col-md-3 mb-2" @onclick="(() => OpenModelForm(prodGroup))">
                             <a>                             
                                 <div class="card">
                                     <div class="row">                                                                          
@@ -78,9 +80,29 @@
         }
     </div>
 </div>
+
+@if (modalForm)
+{
+    <ModalView TitleText="Видалення" Close="(() => CloseModelForm(modalCatalog))" Create="(() => EditProducCatalog(modalCatalog))">
+        <BodyContent>
+
+            <p>Назва продукту</p>
+            <input class="" type="text" @bind="@modalCatalog.Name"/>
+            <p>Картинка URL</p>
+            <input class="" type="url" @bind="@modalCatalog.ImageURL" /><br />
+            <p>Ціна продукта</p
+            <input class="" type="number"  @bind="@modalCatalog.Price" /><br />
+
+        </BodyContent>
+    </ModalView>
+}
+
 @code {
     public ProductCatalogDto ProductCatalogDto { get; set; } = new();
     public IEnumerable<ProductCatalog> fullProductCatalogs { get; set; }
+
+    public bool modalForm { get; set; }
+    public ProductCatalog  modalCatalog { get; set; }
 
     [Inject]
     public IProductCatalogService ProductCatalogService { get; set; }
@@ -88,6 +110,33 @@
     protected override async Task OnInitializedAsync()
     {
         await GetAllProductCatalog();
+        modalForm = false;
+    }
+
+    public void OpenModelForm(ProductCatalog model)
+    {
+        modalForm = true;
+        modalCatalog = model;
+    }
+    public void CloseModelForm(ProductCatalog model)
+    {
+        modalForm = false;
+        modalCatalog = new();
+    }
+
+    public async Task EditProducCatalog(ProductCatalog model)
+    {
+        try
+        {
+            await ProductCatalogService.FullEdit(model);
+            CloseModelForm(modalCatalog);
+
+        }
+        catch (Exception)
+        {
+            
+            throw;
+        }
     }
 
     public async Task GetAllProductCatalog()

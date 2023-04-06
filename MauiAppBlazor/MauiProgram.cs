@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using MauiAppBlazor.Data;
-using MauiAppBlazor.Services;
-using MauiAppBlazor.Services.Contracts;
 using MauiAppBlazor.Service.Contract;
 using MauiAppBlazor.Service;
 
@@ -28,7 +26,6 @@ public static class MauiProgram
 #endif
 
 		builder.Services.AddSingleton<WeatherForecastService>();
-        builder.Services.AddScoped<ICourseCalculationService, CourseCalculationService>();
         builder.Services.AddScoped<IProductCatalogService, ProductCatalogService>();
         builder.Services.AddScoped<ICheckService, CheckService>();
 

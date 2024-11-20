@@ -17,12 +17,12 @@ namespace MauiAppBlazor.Service
             _httpClient = httpClient;
         }
 
-        public Task<Сheck> GetItem(int id)
+        public Task<Bill> GetItem(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Сheck>> GetItems()
+        public async Task<IEnumerable<Bill>> GetItems()
         {
             try
             {
@@ -31,9 +31,9 @@ namespace MauiAppBlazor.Service
                 {
                     if (responce.StatusCode == System.Net.HttpStatusCode.NoContent)
                     {
-                        return default(IEnumerable<Сheck>);
+                        return default(IEnumerable<Bill>);
                     }
-                    return await responce.Content.ReadFromJsonAsync<IEnumerable<Сheck>>();
+                    return await responce.Content.ReadFromJsonAsync<IEnumerable<Bill>>();
                 }
                 else
                 {

@@ -27,7 +27,7 @@ else
                     <a>
                         <div class="card h-100 min-vh-75">
                            
-                            <CheckView CheckCatalogs="@сheck.Products" TitleText="" TotalPrice="@сheck.Price" Date="@сheck.Date" />
+                            <CheckView CheckCatalogs="@сheck.Orders" TitleText="" TotalPrice="@сheck.Price" Date="@сheck.Date" />
 
                         </div>
                     </a>
@@ -44,7 +44,7 @@ else
 
 @code {
 
-    public IEnumerable<Сheck> CheckCatalogs{ get; set; }
+    public IEnumerable<Bill> CheckCatalogs{ get; set; }
 
     [Inject]
     public ICheckService CheckService { get; set; }

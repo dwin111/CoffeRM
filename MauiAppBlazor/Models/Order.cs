@@ -2,7 +2,7 @@
 
 namespace MauiAppBlazor.Models
 {
-    public class Product
+    public class Order
     {
         public long Id { get; set; }
         public string Name { get; set; }

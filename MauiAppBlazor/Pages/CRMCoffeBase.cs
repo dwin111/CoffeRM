@@ -32,12 +32,12 @@ namespace MauiAppBlazor.Pages
             CheckCatalogs = new();
         }
 
-        public List<Product> GetProduct()
+        public List<Order> GetProduct()
         {
-            List<Product> products = new();
+            List<Order> products = new();
             foreach (var productView in CheckCatalogs)
             {
-                var product = new Product
+                var product = new Order
                 {
                     Id = productView.Id,
                     Name = productView.Name,

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using MauiAppBlazor.Models.Enums;
+﻿using MauiAppBlazor.Models.Enums;
 
 namespace MauiAppBlazor.Models
 {

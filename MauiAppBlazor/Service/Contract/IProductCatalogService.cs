@@ -13,6 +13,7 @@ namespace MauiAppBlazor.Service.Contract
         Task<ProductCatalog> GetItem(int id);
         Task<bool> Create(ProductCatalogDto productViewModel);
         Task<bool> FullEdit(ProductCatalog productCatalogModel);
+        Task<bool> Delete(ProductCatalog productCatalogModel);
 
     }
 }

@@ -15,6 +15,7 @@
                 @BodyContent
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-danger" @onclick="(() => Delete.InvokeAsync())">Видалити</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="(() => Close.InvokeAsync())">Скасувати</button>
                 <button type="button" class="btn btn-primary" @onclick="(() => Create.InvokeAsync())">Підтвердити</button>
             </div>
@@ -34,6 +35,8 @@
     public EventCallback Close { get; set; }
     [Parameter]
     public EventCallback Create { get; set; }
+    [Parameter]
+    public EventCallback Delete { get; set; }
 
 
 

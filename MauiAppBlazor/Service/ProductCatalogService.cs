@@ -105,5 +105,31 @@ namespace MauiAppBlazor.Service
                 throw;
             }
         }
+        public async Task<bool> Delete(ProductCatalog productCatalogModel)
+        {
+            try
+            {
+                var stringContent = new StringContent(JsonConvert.SerializeObject(productCatalogModel), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"api/ProductCatalog/Delete", stringContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                else
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    throw new Exception(message);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
